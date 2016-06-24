@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.ksoichiro:gradle-eclipse-aar-plugin:0.1.1'
+        // Related issue: https://code.google.com/p/android/issues/detail?id=192875
+        classpath 'org.jacoco:org.jacoco.core:0.7.5.201505241946'
+    }
+}
+
+allprojects {
+    group = GROUP
+    version = VERSION_NAME
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:2.1.2'
+            classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
+        }
+    }
+}
+
+apply plugin: 'com.github.ksoichiro.eclipse.aar'
+
+eclipseAar {
+    projectNamePrefix = 'observablescrollview-'
+    cleanLibsDirectoryEnabled = true
+}
